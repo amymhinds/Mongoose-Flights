@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <%- include('../partials/nav')%>
+    <form id="add-tickets-form" method="POST" action="/tickets/<%=flight%>">
+      <h1>New Ticket Form</h1>
+      <h3>Enter seat number: </h3>
+      <ul>
+        <li>First character: A-F</li>
+        <li>Second character: 1-9</li>
+        <li>Third character: 0-9</li>
+      </ul>
+      <input name="seat" required pattern="[A-F][1-9]\d?">
+      <h3>Enter Price: </h3>
+      <input name="price">
+      <button type="submit">Submit</button>
+  </form>
+</body>
+
+</html>

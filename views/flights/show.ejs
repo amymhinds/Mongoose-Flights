@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <%- include('../partials/nav')%>
+    <h1>Flight Info</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Airline</th>
+                <th>Flight Number</th>
+                <th>Departure Time</th>
+                <th>Airport</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%=flight.airline%></td>
+                <td><%=flight.flightNo%></td>
+                <td><%=flight.departs%></td>
+                <td><%=flight.airport%></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class = "destinations">
+    <% if (flight.destinations.length > 0) { %>
+    <h1>Destinations</h1>
+    <table class = "destTable">
+        <thead>
+            <tr>
+                <th>Airport</th>
+                <th>Arrival Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% flight.destinations.forEach((f)=>{ %>
+            <tr>
+                <td><%= f.airport%></td>
+                    <td><%= f.arrival%></td>
+            </tr>
+            <%});%>
+        </tbody>
+    </table>
+    <%} %>
+</div>
+<form id="add-destination-form" action="/flights/<%=flight._id%>/destinations" method="POST">
+       <div class = "addDest">
+        <h2>Add Destination</h2>
+        <table>
+            <thead>
+                <th>Destination</th>
+                <th>Arrival Date</th>
+            </thead>
+            <tbody>
+                <td>
+                    <select name="airport">
+                        <option value="AUS">AUS</option>
+                        <option value="DAL">DAL</option>
+                        <option value="LAX">LAX</option>
+                        <option value="SAN">SAN</option>
+                        <option value="SEA">SEA</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="datetime-local" id="arrival" name="arrival" min="2019-11-17T00:00">
+                </td>
+            </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </div> 
+    </form>
+    <div class ="tickets">
+            <h2>Tickets</h2>
+            <a href="/flights/<%=flight._id%>/tickets/new">New Ticket</a>
+            <table class = 'tix'> 
+                <thead>
+                    <th>Seat Num</th>
+                    <th>Ticket Price</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    <% tickets.forEach((t)=>{ %>
+                        <tr>
+                            <td><%= t.seat%></td>
+                            <td><%= t.price%></td>
+                            <form action="/tickets/<%=flight._id%>?_method=DELETE"
+                                class="delete-form" method="POST">
+                                <td><button>X</button></td>
+                            </form>
+                        </tr>
+                    <%});%>
+                </tbody>
+            </table>
+        </div>
+</body>
+</html>

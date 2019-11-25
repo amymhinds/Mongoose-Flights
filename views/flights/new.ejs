@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <%- include('../partials/nav')%>
+    <h2>Enter a New Flight</h2>
+<form action="/flights" method="POST">
+	<label>Airline:
+	  <input type="text" name="airline">
+	</label><br>
+	<label>FlightNo:
+	  <input type="text" name="flightNo">
+    </label><br>
+    <label for="departure-time">Choose a time for your departure:</label>
+        <input type="datetime-local" id="departs"
+        name="departs" value="2019-11-17T19:30"
+        min="2019-11-17T00:00" max="2020-12-31T00:00"> 
+        <label>Airport:</label>
+        <select name="airport">
+            <option value="AUS">AUS</option>
+            <option value="DAL">DAL</option>
+            <option value="LAX">LAX</option>
+            <option value="SAN">SAN</option>
+            <option value="SEA">SEA</option>
+        </select>
+        <input type="submit" value="Add Flight">
+    </form>
+</body>
+</html>
